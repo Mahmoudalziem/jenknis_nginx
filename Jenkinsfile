@@ -16,13 +16,13 @@ pipeline {
         }
         stage('deploy'){
             steps{
-                                withCredentials([usernamePassword(credentialsId: 'docker_cer', passwordVariable: 'pass', usernameVariable: 'user')]){
-                sh '''
-                    docker login -u ${user} -p {pass}
-                    docker push azima/jenkins:{BUILD_NUMBER}
-                    echo done
-                '''
-                                }
+                withCredentials([usernamePassword(credentialsId: 'docker_cer', passwordVariable: 'pass', usernameVariable: 'user')]){
+                    sh '''
+                        docker login -u ${user} -p {pass}
+                        docker push azima/jenkins:{BUILD_NUMBER}
+                        echo done
+                    '''
+                }
             }
 
         }
