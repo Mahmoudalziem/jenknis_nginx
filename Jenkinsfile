@@ -8,27 +8,29 @@ pipeline{
     stages{
         stage('build'){
             steps{
-                echo "My Name ${env.NAME}"
                 sh '''
-                pwd
-                ls
-                date
+                    docker build -t azima/jenkins:${BUILD_NUMBER} .
                 '''
             }
         }
-        stage('test'){
+        stage('Docker Login'){
             steps{
              catchError(message : "Message"){
-                 echo "test"
-             }
-            }
-        }
-        stage('deploy'){
-            steps{
-                withCredentials([usernamePassword(credentialsId: 'DOCKER_AUTH', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                 withCredentials([usernamePassword(credentialsId: 'DOCKER_AUTH', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     sh '''
     		        docker login -u ${user} -p ${pass}
                     echo done
+                    '''
+                }
+             }
+            }
+        }
+        stage('Push Image'){
+            steps{
+                catchError(Message : "Message") {
+                    sh '''
+                        docker push azima/jenkins:${BUILD_NUMBER}
+                        echo done
                     '''
                 }
             }
