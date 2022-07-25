@@ -1,42 +1,46 @@
-pipeline {
-    agent {
-        label 'ec2'
+pipeline{
+    agent{
+        label "ec2"
     }
-    tools{
-        git
+    environment{
+        NAME="Mahmoud Abd Alziem"
     }
-    stages {
+    stages{
         stage('build'){
             steps{
-                    sh '''
-                        docker build -it azima/jenkins:{BUILD_NUMBER} .
-                    '''
-                
+                echo "My Name ${env.NAME}"
+                sh '''
+                pwd
+                ls
+                date
+                '''
+            }
+        }
+        stage('test'){
+            steps{
+             catchError(message : "Message"){
+                 echo test
+             }
             }
         }
         stage('deploy'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'docker_cer', passwordVariable: 'pass', usernameVariable: 'user')]){
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_AUTH', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     sh '''
-                        docker login -u ${user} -p {pass}
-                        docker push azima/jenkins:{BUILD_NUMBER}
-                        echo done
+                    docker login -u ${pass} -p ${pass}
+                    echo done
                     '''
                 }
             }
-
         }
     }
 
-    post {
-        always {
-            echo "==== Always ====="
+    post{
+        always{
+            echo "Start Stages Pipeline"
         }
-        success {
-            echo "====== Success ===="
-        }
-        failure {
-            echo "========= Failure ====="
+        success{
+            slackSend color: "good", message: "Message from Jenkins Pipeline"
         }
     }
 }
