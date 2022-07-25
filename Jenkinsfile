@@ -18,6 +18,7 @@ pipeline{
                     sh '''
     		        docker login -u ${user} -p ${pass}
                     echo done
+                    echo hello
                     '''
                 } 
              }
