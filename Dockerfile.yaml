@@ -12,7 +12,7 @@
 #COPY
 #ADD 
 #ENV
-#LABEL
+#LABEL 
 # VOLUME /var/run/docker.sock /var/run/docker.sock
 # EXPOSE 8080/tcp 443/tcp
 #ENTRYPOINT [""]
