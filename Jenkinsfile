@@ -19,7 +19,7 @@ pipeline{
         stage('test'){
             steps{
              catchError(message : "Message"){
-                 echo test
+                 echo "test"
              }
             }
         }
@@ -27,7 +27,7 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_AUTH', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     sh '''
-                    docker login -u ${user} -p ${pass}
+    		        docker login -u ${user} -p ${pass}
                     echo done
                     '''
                 }
@@ -40,7 +40,10 @@ pipeline{
             echo "Start Stages Pipeline"
         }
         success{
-            slackSend color: "good", message: "Message from Jenkins Pipeline"
+            slackSend color: "#fff", message: "Message from Jenkins Pipeline"
+        }
+        failure{
+            slackSend color: "#000", message: "Message from Jenkins Pipeline"
         }
     }
 }
