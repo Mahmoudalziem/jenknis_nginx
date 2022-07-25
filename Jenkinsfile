@@ -19,7 +19,7 @@ pipeline{
     		        docker login -u ${user} -p ${pass}
                     echo done
                     '''
-                }
+                } 
              }
             }
         }
