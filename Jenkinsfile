@@ -1,7 +1,5 @@
 pipeline{
-    agent{
-        label "ec2"
-    }
+    agent any
     environment{
         NAME="Mahmoud Abd Alziem"
     }
@@ -27,7 +25,7 @@ pipeline{
         }
         stage('Push Image'){
             steps{
-                catchError(Message : "Message") {
+                catchError(message : "Message") {
                     sh '''
                         docker push azima/jenkins:${BUILD_NUMBER}
                         echo done
