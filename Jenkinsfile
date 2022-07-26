@@ -37,6 +37,7 @@ pipeline{
             steps{
                 catchError(message : "Message"){
                     sh '''
+                        docker rm -f ecommerce
                         docker run -it -d -p 8080:80 --name ecommerce azima/jenkins:${BUILD_NUMBER}
                         echo done
                     '''
