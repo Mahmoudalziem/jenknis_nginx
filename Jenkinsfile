@@ -33,11 +33,19 @@ pipeline{
                 }
             }
         }
-        stage("Run Docker image"){
+        stage("docker remove"){
             steps{
                 catchError(message : "Message"){
                     sh '''
                         docker rm -f ecommerce
+                    '''
+                }
+            }
+        }
+        stage("Run Docker image"){
+            steps{
+                catchError(message : "Message"){
+                    sh '''
                         docker run -it -d -p 8080:80 --name ecommerce azima/jenkins:${BUILD_NUMBER}
                         echo done
                     '''
