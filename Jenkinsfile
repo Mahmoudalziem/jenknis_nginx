@@ -51,10 +51,10 @@ pipeline{
             echo "Start Stages Pipeline"
         }
         success{
-            slackSend color: "#fff", message: "Message from Jenkins Pipeline"
+            slackSend color: "#fff", message: "Success Publish Ecommerce Application"
         }
         failure{
-            slackSend color: "#000", message: "Message from Jenkins Pipeline"
+            slackSend color: "#000", message: "Failed Publish Ecommerce Application"
         }
     }
 }
