@@ -33,6 +33,16 @@ pipeline{
                 }
             }
         }
+        stage("Run Docker image"){
+            steps{
+                catchError(message : "Message"){
+                    sh '''
+                        docker run -it -d -p -p 8080:80 --name ecommerce azima/jenkins:${BUILD_NUMBER}
+                        echo done
+                    '''
+                }
+            }
+        }
     }
 
     post{
