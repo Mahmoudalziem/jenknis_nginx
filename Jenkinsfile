@@ -9,15 +9,10 @@ pipeline{
                 withSonarQubeEnv(credentialsId: 'sonarQube',installationName: 'sonarQube') {
                     sh '''
                         /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
-                        -D sonar.projectVersion=1.0-SNAPSHOT \
-                        -D sonar.login=admin \
-                        -D sonar.password=root \
-                        -D sonar.projectBaseDir=/var/lib/jenkins/workspace/test/ \
-                        -D sonar.projectKey=test \
-                        -D sonar.sourceEncoding=UTF-8 \
-                        -D sonar.language=html \
-                        -D sonar.sources=application/ \
-                        -D sonar.host.url=http://sonarqube.azima.website/
+                          -Dsonar.projectKey=test \
+                          -Dsonar.sources=application/ \
+                          -Dsonar.host.url=http://sonarqube.azima.website \
+                          -Dsonar.login=e97122af599b09421d3700c470e451db12887433
                     '''
                 }
             }
