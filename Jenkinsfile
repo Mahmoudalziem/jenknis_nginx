@@ -12,7 +12,6 @@ pipeline{
                 withSonarQubeEnv(installationName: 'sonarQube',credentialsId: 'sonarQube') {
                     sh ''' 
                           $SCANNER_HOME/bin/sonar-scanner 
-                          -Dsonar.sources=application/
                     '''
                 }
             }
