@@ -4,7 +4,7 @@ pipeline{
         NAME="Mahmoud Abd Alziem"
         SCANNER_HOME = tool 'sonarQube'
         ORGANIZATION = "microservices"
-        PROJECT_NAME = "shopping"
+        PROJECT_NAME = "test"
     }
     stages{
         stage('SonarQube Analysis') {
@@ -13,7 +13,10 @@ pipeline{
                     sh '''
                           $SCANNER_HOME/bin/sonar-scanner 
                           -Dsonar.organization=$ORGANIZATION \
-                          -Dsonar.sources=application/ 
+                          -Dsonar.projectKey=$PROJECT_NAME \
+                          -Dsonar.sources=application/ \
+                          -Dsonar.host.url=http://sonarqube.azima.website \
+                          -Dsonar.login=fc5f68885788807412710479646236ee6b5af141
                     '''
                 }
             }
