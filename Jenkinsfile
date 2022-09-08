@@ -2,9 +2,9 @@ pipeline{
     agent any
     environment{
         NAME="Mahmoud Abd Alziem"
-        SCANNER_HOME = tool 'sonarQube'
-        ORGANIZATION = "microservices"
-        PROJECT_NAME = "test"
+        SCANNER_HOME=tool 'sonarQube'
+        ORGANIZATION="microservices"
+        PROJECT_NAME="test"
     }
     stages{
         stage('SonarQube Analysis') {
