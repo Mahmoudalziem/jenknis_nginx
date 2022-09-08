@@ -2,13 +2,16 @@ pipeline{
     agent any
     environment{
         NAME="Mahmoud Abd Alziem"
+        SCANNER_HOME = tool 'SonarQubeScanner'
+        ORGANIZATION = "igorstojanovski-github"
+        PROJECT_NAME = "igorstojanovski_jenkins-pipeline-as-code"
     }
     stages{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv(credentialsId: 'sonarQube',installationName: 'sonarQube') {
                     sh '''
-                        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
+                          $SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
                           -Dsonar.projectKey=test \
                           -Dsonar.sources=application/ \
                           -Dsonar.host.url=http://sonarqube.azima.website \
