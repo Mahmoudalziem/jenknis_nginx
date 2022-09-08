@@ -6,8 +6,8 @@ pipeline{
     stages{
         stage('SonarQube Analysis') {
             steps{
-                withSonarQubeEnv('SonarQube') {
-                    sh """
+                withSonarQubeEnv(credentialsId: 'sonarQube') {
+                    sh '''
                         /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
                         -D sonar.projectVersion=1.0-SNAPSHOT \
                         -D sonar.login=admin \
@@ -18,7 +18,7 @@ pipeline{
                         -D sonar.language=html \
                         -D sonar.sources=application/ \
                         -D sonar.host.url=http://sonarqube.azima.website/
-                    """
+                    '''
                 }
             }
         }
