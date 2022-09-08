@@ -13,7 +13,7 @@ pipeline{
                     sh '''
                           $SCANNER_HOME/bin/sonar-scanner 
                           -Dsonar.organization=$ORGANIZATION \
-                          -Dsonar.projectKey=$PROJECT_NAME \
+                          -Dsonar.projectKey=test \
                           -Dsonar.sources=application/ \
                           -Dsonar.host.url=http://sonarqube.azima.website \
                           -Dsonar.login=fc5f68885788807412710479646236ee6b5af141
