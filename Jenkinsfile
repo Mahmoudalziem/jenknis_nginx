@@ -10,11 +10,11 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv(installationName: 'sonarQube',credentialsId: 'sonarQube') {
-                    sh '''
+                    sh ''' 
                           $SCANNER_HOME/bin/sonar-scanner 
-                          -Dsonar.organization=$ORGANIZATION \
-                          -Dsonar.projectKey=$PROJECT_NAME \
+                          -Dsonar.projectKey=test \
                           -Dsonar.sources=application/ \
+                          -Dsonar.host.url=http://sonarqube.azima.website \
                           -Dsonar.login=d7f3c4bbb51bf6e9c1a754c37c72e2d6e8e9cae9
                     '''
                 }
