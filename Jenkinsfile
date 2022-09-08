@@ -5,20 +5,22 @@ pipeline{
     }
     stages{
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarQube'
-            withSonarQubeEnv('SonarQube') {
-                sh """
-                    /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
-                    -D sonar.projectVersion=1.0-SNAPSHOT \
-                    -D sonar.login=admin \
-                    -D sonar.password=root \
-                    -D sonar.projectBaseDir=/var/lib/jenkins/workspace/test/ \
-                    -D sonar.projectKey=test \
-                    -D sonar.sourceEncoding=UTF-8 \
-                    -D sonar.language=html \
-                    -D sonar.sources=application/ \
-                    -D sonar.host.url=http://sonarqube.azima.website/
-                """
+            steps{
+                def scannerHome = tool 'SonarQube'
+                withSonarQubeEnv('SonarQube') {
+                    sh """
+                        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
+                        -D sonar.projectVersion=1.0-SNAPSHOT \
+                        -D sonar.login=admin \
+                        -D sonar.password=root \
+                        -D sonar.projectBaseDir=/var/lib/jenkins/workspace/test/ \
+                        -D sonar.projectKey=test \
+                        -D sonar.sourceEncoding=UTF-8 \
+                        -D sonar.language=html \
+                        -D sonar.sources=application/ \
+                        -D sonar.host.url=http://sonarqube.azima.website/
+                    """
+                }
             }
         }
         stage('build'){
