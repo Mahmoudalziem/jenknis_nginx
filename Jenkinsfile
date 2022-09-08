@@ -3,20 +3,18 @@ pipeline{
     environment{
         NAME="Mahmoud Abd Alziem"
         SCANNER_HOME = tool 'sonarQube'
-        ORGANIZATION = "igorstojanovski-github"
-        PROJECT_NAME = "igorstojanovski_jenkins-pipeline-as-code"
+        ORGANIZATION = "microservices"
+        PROJECT_NAME = "shopping"
     }
     stages{
         stage('SonarQube Analysis') {
             steps{
-                withSonarQubeEnv(installationName: 'sonarQube') {
+                withSonarQubeEnv(installationName: 'sonarQube',credentialsId: 'sonarQube') {
                     sh '''
                           $SCANNER_HOME/bin/sonar-scanner 
                           -Dsonar.organization=$ORGANIZATION \
-                          -Dsonar.projectKey=test \
-                          -Dsonar.sources=application/ \
-                          -Dsonar.host.url=http://sonarqube.azima.website \
-                          -Dsonar.login=e97122af599b09421d3700c470e451db12887433
+                          -Dsonar.projectKey=$PROJECT_NAME \
+                          -Dsonar.sources=application/ 
                     '''
                 }
             }
