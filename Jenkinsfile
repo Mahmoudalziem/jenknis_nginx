@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         NAME="Mahmoud Abd Alziem"
-        SCANNER_HOME = tool 'SonarQubeScanner'
+        SCANNER_HOME = tool 'sonarQube'
         ORGANIZATION = "igorstojanovski-github"
         PROJECT_NAME = "igorstojanovski_jenkins-pipeline-as-code"
     }
