@@ -3,6 +3,7 @@ pipeline{
     environment{
         NAME="Mahmoud Abd Alziem"
         SCANNER_HOME=tool 'sonarQube'
+        ORGANIZATION="microservices-github"
         PROJECT_NAME="test"
     }
     stages{
@@ -11,9 +12,10 @@ pipeline{
                 withSonarQubeEnv(installationName: 'sonarQube',credentialsId: 'sonarQube') {
                     sh '''
                           $SCANNER_HOME/bin/sonar-scanner 
+                          -Dsonar.organization=$ORGANIZATION \
                           -Dsonar.projectKey=$PROJECT_NAME \
                           -Dsonar.sources=application/ \
-                          -Dsonar.login=sonarqube
+                          -Dsonar.login=d7f3c4bbb51bf6e9c1a754c37c72e2d6e8e9cae9
                     '''
                 }
             }
