@@ -7,24 +7,15 @@ pipeline{
         PROJECT_NAME="test"
     }
     stages{
-    
-        stage('SonarQube Analysis') {
-            steps{
-                withSonarQubeEnv(installationName: 'sonarQube',credentialsId: 'sonarQube') {
-                    sh ''' 
-                          $SCANNER_HOME/bin/sonar-scanner 
-                          -Dsonar.host=http://sonarqube.azima.website/
-                    '''
-                }
-            }
-        }
         
         stage('build'){
             steps{
-                sh '''
-                    docker build -t azima/jenkins:${BUILD_NUMBER} .
-                '''
-                                
+                 withSonarQubeEnv(installationName: 'sonarQube',credentialsId: 'sonarQube') {
+                    sh ''' 
+                          $SCANNER_HOME/bin/sonar-scanner 
+                          docker build -t azima/jenkins:${BUILD_NUMBER} .
+                    '''
+                }               
             }
         }
         stage('Docker Login'){
