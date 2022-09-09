@@ -3,7 +3,7 @@ pipeline{
     environment{
         NAME="Mahmoud Abd Alziem"
         SCANNER_HOME=tool 'sonarQube'
-        ORGANIZATION="microservices-github"
+        ORGANIZATION="microservices"
         PROJECT_NAME="test"
     }
     stages{
